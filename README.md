@@ -1,1 +1,3 @@
 # Django-School
+
+## Projeto em desenvolvimento...
