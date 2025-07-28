@@ -1,22 +1,25 @@
-"""
-URL configuration for app project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path
+from core.views import AboutListView, ContactListView, HomeListView
+from alunos.views import AlunosListView, DetalheAlunoListView, FormularioAlunoListView, DeletarAlunoListView
+from professores.views import ProfessorListView, DetalheProfessorListView, FormularioProfessorListView, DeletarProfessorListView
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # Página principal
+    path('', HomeListView.as_view(), name='home'),
+    path('sobre/', AboutListView.as_view(), name='about'),
+    path('contato/', ContactListView.as_view(), name='contact'),
+    # Página de Alunos
+    path('alunos/list', AlunosListView.as_view(), name='listar_alunos'),
+    path('alunos/detalhe', DetalheAlunoListView.as_view(), name='detalhe_aluno'),
+    path('alunos/formulario', FormularioAlunoListView.as_view(), name='formulario_aluno'),
+    path('alunos/deletar', DeletarAlunoListView.as_view(), name='deletar_aluno'),
+    # Página de Professores
+    path('professores/list', ProfessorListView.as_view(), name='listar_professores'),
+    path('professores/detalhe', DetalheProfessorListView.as_view(), name='detalhe_professor'),
+    path('professores/formulario', FormularioProfessorListView.as_view(), name='formulario_professor'),
+    path('professores/deletar', DeletarProfessorListView.as_view(), name='deletar_professor'),  
 ]

@@ -1,1 +1,13 @@
 {% extends "core/base.html" %}
+
+{% block content %}
+<h1>Página lista de professores</h1>
+<nav>
+    <ul>
+        <li><a href="{% url 'home' %}">Voltar</a></li>
+        <li><a href="{% url 'detalhe_professor' %}">Detalhe</a></li>
+        <li><a href="{% url 'formulario_professor' %}">Formulário de professores</a></li>
+        <li><a href="{% url 'deletar_professor' %}">Deletar professores</a></li>
+    </ul>
+</nav>
+{% endblock %}

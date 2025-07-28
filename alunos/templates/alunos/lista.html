@@ -1,1 +1,13 @@
 {% extends "core/base.html" %}
+
+{% block content %}
+<h1>Página lista de alunos</h1>
+<nav>
+    <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'formulario_aluno' %}">Formulário de alunos</a></li>
+        <li><a href="{% url 'detalhe_aluno' %}">Detalhe</a></li>
+        <li><a href="{% url 'deletar_aluno' %}">Deletar aluno</a></li>
+    </ul>
+</nav>
+{% endblock %}

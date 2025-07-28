@@ -1,1 +1,10 @@
-{% extends "base.html" %}
+{% extends "core/base.html" %}
+
+{% block content %}
+<h1>Página sobre</h1>
+<nav>
+    <ul>
+        <li><a href="{% url 'home' %}">voltar</a></li>
+    </ul>
+</nav>
+{% endblock %}
