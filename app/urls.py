@@ -4,8 +4,6 @@ from core.views import AboutListView, ContactListView, HomeListView
 from alunos.views import AlunosListView, DetalheAlunoListView, FormularioAlunoListView, DeletarAlunoListView
 from professores.views import ProfessorListView, DetalheProfessorListView, FormularioProfessorListView, DeletarProfessorListView
 
-
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     # Página principal
