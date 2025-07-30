@@ -21,9 +21,16 @@ class HomeRegisterView(CreateView):
     form_class = RegisterCoreForm
     template_name = 'auth/register.html'
     success_url = reverse_lazy('home')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['register_user'] = RegisterCoreForm()
+        return context
+    
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
 
-    def form_invalid(self, form):
-        return super().form_invalid(form)
 
 def logout_view(request):
     logout(request)
