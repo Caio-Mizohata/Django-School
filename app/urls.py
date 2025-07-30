@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from core.views import AboutListView, ContactListView, HomeListView
+from core.views import HomeListView, HomeLoginView, HomeRegisterView, logout_view
 from alunos.views import AlunosListView, DetalheAlunoListView, FormularioAlunoListView, DeletarAlunoListView
 from professores.views import ProfessorListView, DetalheProfessorListView, FormularioProfessorListView, DeletarProfessorListView
 
@@ -8,8 +8,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # Página principal
     path('', HomeListView.as_view(), name='home'),
-    path('sobre/', AboutListView.as_view(), name='about'),
-    path('contato/', ContactListView.as_view(), name='contact'),
+    path('login/', HomeLoginView.as_view(), name='login'),
+    path('register/', HomeRegisterView.as_view(), name='register'),
+    path('logout/', logout_view, name='logout'),
     # Página de Alunos
     path('alunos/list', AlunosListView.as_view(), name='listar_alunos'),
     path('alunos/detalhe', DetalheAlunoListView.as_view(), name='detalhe_aluno'),

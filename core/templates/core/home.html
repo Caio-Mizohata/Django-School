@@ -1,14 +1,96 @@
 {% extends "core/base.html" %}
 
 {% block content %}
-<h1>Página Home</h1>
-<nav>
-    <ul>
-        <li><a href="{% url 'about' %}">Sobre</a></li>
-        <li><a href="{% url 'contact' %}">Contato</a></li>
-        <li><a href="{% url 'listar_alunos' %}">Lista de alunos</a></li>
-        <li><a href="{% url 'listar_professores' %}">Lista de professores</a></li>
-    </ul>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'home' %}"><i class="bi bi-mortarboard-fill"></i> Sistema Escolar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'listar_alunos' %}"><i class="bi bi-person-badge"></i> Alunos</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'listar_professores' %}"><i class="bi bi-person-workspace"></i> Professores</a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'logout' %}" class="nav-link active"><i class="bi bi-box-arrow-right"></i> Sair</a>
+                    </li>
+
+
+                {% else %} 
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'login' %}"><i class="bi bi-box-arrow-in-right"> Login</i></a>
+                    </li>
+                    <li>
+                        <a class="nav-link active" href="{% url 'register' %}"><i class="bi bi-person-plus"> Cadastrar</i></a>
+                    </li>
+                {% endif %}
+            
+
+            </ul>
+        </div>
+    </div>
 </nav>
 
+<!-- Conteúdo principal -->
+<div class="container">
+    <!-- Boas-vindas -->
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <h1 class="display-5">Bem-vindo ao Sistema Escolar</h1>
+            <p class="lead">Gerencie alunos, professores e turmas de forma simples e eficiente.</p>
+        </div>
+    </div>
+{% if user.is_authenticated %}
+    <!-- Cards de acesso rápido -->
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <i class="bi bi-person-badge fs-1 text-primary"></i>
+                    <h5 class="card-title mt-2">Alunos</h5>
+                    <p class="card-text">Visualize, cadastre e edite informações dos alunos.</p>
+                    <a href="{% url 'listar_alunos' %}" class="btn btn-primary">Ver Alunos</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <i class="bi bi-person-workspace fs-1 text-success"></i>
+                    <h5 class="card-title mt-2">Professores</h5>
+                    <p class="card-text">Gerencie o cadastro e os dados dos professores.</p>
+                    <a href="{% url 'listar_professores' %}" class="btn btn-success">Ver Professores</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <i class="bi bi-people fs-1 text-warning"></i>
+                    <h5 class="card-title mt-2">Turmas</h5>
+                    <p class="card-text">Acesse as turmas, adicione alunos e professores.</p>
+                    <a href="" class="btn btn-warning text-white">Ver Turmas</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+    <!-- Formulário de login -->
+    <h1 class="text-center mb-4 ">Faça login para acessar o sistema</h1>
+
+{% endif %}
+
+<footer class="bg-primary text-white text-center py-3 fixed-bottom">
+    <div class="container">
+        <small>&copy; {{ year|default:"2025" }} Sistema Escolar. Todos os direitos reservados.</small>
+    </div>
+</footer>
 {% endblock %}

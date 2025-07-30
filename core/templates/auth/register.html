@@ -1,0 +1,30 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<form method="post" autocomplete="off">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="username" class="form-label">Nome de Usuário</label>
+        <input type="text" class="form-control" id="username" name="username" required value="{{ username }}">
+    </div>
+
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email" required value="{{ email }}">
+    </div>
+
+    <div class="mb-3">
+        <label for="password" class="form-label">Senha</label>
+        <input type="password" class="form-control" id="password" name="password1" required value="{{ password1 }}">
+    </div>
+
+    <div class="mb-3">
+        <label for="confirm_password" class="form-label">Confirmar Senha</label>
+        <input type="password" class="form-control" id="confirm_password" name="password2" required value="{{ password2 }}">
+    </div>
+
+    <input type="submit" value="Cadastrar" class="btn btn-primary">
+    
+</form>
+
+{% endblock %}
