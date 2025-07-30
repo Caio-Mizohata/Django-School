@@ -22,6 +22,9 @@ class HomeRegisterView(CreateView):
     template_name = 'auth/register.html'
     success_url = reverse_lazy('home')
 
+    def form_invalid(self, form):
+        return super().form_invalid(form)
+
 def logout_view(request):
     logout(request)
     return redirect('home')
