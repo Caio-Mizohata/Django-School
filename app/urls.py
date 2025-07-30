@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.conf.urls.static import static
+from django.conf import settings
 from django.urls import path
 from core.views import HomeListView, HomeLoginView, HomeRegisterView, logout_view
 from alunos.views import AlunosListView, DetalheAlunoListView, FormularioAlunoListView, DeletarAlunoListView
@@ -21,4 +23,4 @@ urlpatterns = [
     path('professores/detalhe', DetalheProfessorListView.as_view(), name='detalhe_professor'),
     path('professores/formulario', FormularioProfessorListView.as_view(), name='formulario_professor'),
     path('professores/deletar', DeletarProfessorListView.as_view(), name='deletar_professor'),  
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
