@@ -1,13 +1,45 @@
 {% extends "core/base.html" %}
 
-{% block title %} <title>Deletar aluno - Gestão Escola Django</title> {% endblock %}
-
 {% block content %}
-<h1>Página deletar aluno</h1>
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h2 class="display-6 fw-bold text-primary">Gerenciar Alunos</h2>
+        <p class="lead text-muted">Visualize os alunos e exclua aqueles que não fazem mais parte do sistema.</p>
+    </div>
 
-<nav>
-    <ul>
-        <li><a href="{% url 'listar_alunos' %}">Voltar</a></li>
-    </ul>
-</nav>
+    {% if object_list %}
+    <div class="card shadow-sm border-0 rounded-4 bg-white p-4">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle text-center">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Idade</th>
+                        <th>Turma</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for aluno in object_list %}
+                    <tr>
+                        <td>{{ aluno.nome }}</td>
+                        <td>{{ aluno.idade }}</td>
+                        <td>{{ aluno.turma }}</td>
+                        <td>
+                            <a href="{% url 'deletar_aluno_confirmar' aluno.id %}" class="btn btn-danger btn-sm rounded-pill">
+                                <i class="bi bi-trash-fill"></i> Deletar
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% else %}
+    <div class="card border-0 shadow-sm rounded-4 bg-light p-4 text-center">
+        <p class="text-muted mb-0">Nenhum aluno cadastrado no momento.</p>
+    </div>
+    {% endif %}
+</div>
 {% endblock %}
