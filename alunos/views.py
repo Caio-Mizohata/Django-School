@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from alunos.models import AlunosModel
-from django.views.generic import ListView
+from alunos.forms import AlunoForm, EscolaForm
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView
 
 class AlunosListView(ListView):
     model = AlunosModel
@@ -12,10 +14,11 @@ class DetalheAlunoListView(ListView):
     template_name = 'alunos/detalhe.html'
     context_object_name = 'alunos'
 
-class FormularioAlunoListView(ListView):
+class FormularioAlunoListView(CreateView):
     model = AlunosModel
     template_name = 'alunos/formulario.html'
-    context_object_name = 'alunos'
+    form_class = AlunoForm
+    success_url = reverse_lazy('listar_alunos')
 
 class DeletarAlunoListView(ListView):
     model = AlunosModel

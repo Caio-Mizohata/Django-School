@@ -1,15 +1,96 @@
 {% extends "core/base.html" %}
 
-{% block title %} <title>Alunos - Gestão Escola Django </title> {% endblock %}
+{% block title %}
+<title>Alunos - Gestão Escola Django</title>
+{% endblock %}
 
 {% block content %}
-<h1>Página lista de alunos</h1>
-<nav>
-    <ul>
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'formulario_aluno' %}">Formulário de alunos</a></li>
-        <li><a href="{% url 'detalhe_aluno' %}">Detalhe</a></li>
-        <li><a href="{% url 'deletar_aluno' %}">Deletar aluno</a></li>
-    </ul>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'home' %}"><i class="bi bi-mortarboard-fill"></i> Sistema Escolar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'home' %}"><i class="bi bi-house"></i> Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'formulario_aluno' %}"><i class="bi bi-person-plus"></i> Novo Aluno</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'listar_alunos' %}"><i class="bi bi-person-badge"></i> Alunos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'logout' %}"><i class="bi bi-box-arrow-right"></i> Sair</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </nav>
+
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <h1 class="display-6"><i class="bi bi-person-badge"></i> Lista de Alunos</h1>
+            <p class="lead">Veja todos os alunos cadastrados no sistema.</p>
+        </div>
+    </div>
+
+    <div class="mb-3 text-end">
+        <a href="{% url 'formulario_aluno' %}" class="btn btn-primary">
+            <i class="bi bi-person-plus"></i> Adicionar Aluno
+        </a>
+    </div>
+
+    {% if alunos %}
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle shadow-sm">
+            <thead class="table-primary">
+                <tr>
+                    <th>#</th>
+                    <th>Nome</th>
+                    <th>Data de Nascimento</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Responsável</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for aluno in alunos %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ aluno.nome_aluno }}</td>
+                    <td>{{ aluno.data_nascimento|date:"d/m/Y" }}</td>
+                    <td>{{ aluno.email }}</td>
+                    <td>{{ aluno.telefone }}</td>
+                    <td>{{ aluno.nome_responsavel|default:"-" }}</td>
+                    <td>
+                        <a href="{% url 'detalhe_aluno' aluno.id %}" class="btn btn-sm btn-info" title="Detalhes">
+                            <i class="bi bi-eye"></i>
+                        </a>
+                        <a href="{% url 'editar_aluno' aluno.id %}" class="btn btn-sm btn-warning" title="Editar">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <a href="{% url 'deletar_aluno' aluno.id %}" class="btn btn-sm btn-danger" title="Deletar" onclick="return confirm('Tem certeza que deseja deletar este aluno?');">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <div class="alert alert-info text-center" role="alert">
+            Nenhum aluno cadastrado ainda.
+        </div>
+    {% endif %}
+</div>
+
+<footer class="bg-primary text-white text-center py-3 fixed-bottom">
+    <div class="container">
+        <small>&copy; {{ year|default:"2025" }} Sistema Escolar. Todos os direitos reservados.</small>
+    </div>
+</footer>
 {% endblock %}
