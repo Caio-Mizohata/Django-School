@@ -1,13 +1,34 @@
 {% extends "core/base.html" %}
 
-{% block title %} <title>Detalhes - Gestão Escola Django</title> {% endblock %}
+{% block title %}
+    <title>Detalhes - Sistema Escolar</title>
+{% endblock %}
 
 {% block content %}
-<h1>Pagina detalhes de alunos</h1>
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h2 class="display-6 text-primary fw-bold">Detalhes do Aluno</h2>
+        <p class="text-muted">Veja abaixo as informações completas do aluno selecionado.</p>
+    </div>
 
-<nav>
-    <ul>
-        <li><a href="{% url 'listar_alunos' %}">Voltar</a></li>
-    </ul>
-</nav>
+    <div class="card shadow-sm border-0 rounded-4 bg-white p-4 mx-auto" style="max-width: 600px;">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <strong>Nome:</strong> {{ object.nome }}
+            </li>
+            <li class="list-group-item">
+                <strong>Idade:</strong> {{ object.idade }}
+            </li>
+            <li class="list-group-item">
+                <strong>Turma:</strong> {{ object.turma }}
+            </li>
+        </ul>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{% url 'listar_alunos' %}" class="btn btn-outline-primary rounded-pill">
+            <i class="bi bi-arrow-left"></i> Voltar para lista
+        </a>
+    </div>
+</div>
 {% endblock %}
