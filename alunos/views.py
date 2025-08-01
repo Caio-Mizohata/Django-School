@@ -2,7 +2,7 @@ from django.shortcuts import render
 from alunos.models import AlunosModel
 from alunos.forms import AlunoForm, EscolaForm
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DeleteView
 
 class AlunosListView(ListView):
     model = AlunosModel
@@ -23,4 +23,5 @@ class FormularioAlunoListView(CreateView):
 class DeletarAlunoListView(ListView):
     model = AlunosModel
     template_name = 'alunos/deletar.html'
-    context_object_name = 'alunos'
+    sucess_url = reverse_lazy('listar_alunos')
+
