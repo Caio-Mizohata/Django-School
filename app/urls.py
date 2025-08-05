@@ -3,7 +3,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.urls import path
 from core.views import HomeListView, HomeLoginView, HomeRegisterView, logout_view
-from alunos.views import AlunosListView, DetalheAlunoListView, FormularioAlunoListView, DeletarAlunoListView
+from alunos.views import AlunosListView, DetalheAlunoDetailView, FormularioAlunoCreateView, EditarAlunoView, DeletarAlunoDeleteView
 from professores.views import ProfessorListView, DetalheProfessorListView, FormularioProfessorListView, DeletarProfessorListView
 
 urlpatterns = [
@@ -15,9 +15,10 @@ urlpatterns = [
     path('logout/', logout_view, name='logout'),
     # Página de Alunos
     path('alunos/list', AlunosListView.as_view(), name='listar_alunos'),
-    path('alunos/detalhe', DetalheAlunoListView.as_view(), name='detalhe_aluno'),
-    path('alunos/formulario', FormularioAlunoListView.as_view(), name='formulario_aluno'),
-    path('alunos/deletar', DeletarAlunoListView.as_view(), name='deletar_aluno'),
+    path('alunos/<int:pk>/detalhe/', DetalheAlunoDetailView.as_view(), name='detalhe_aluno'),
+    path('alunos/formulario', FormularioAlunoCreateView.as_view(), name='formulario_aluno'),
+    path('alunos/<int:pk>/editar', EditarAlunoView.as_view(), name='editar_aluno'),
+    path('alunos/<int:pk>/deletar', DeletarAlunoDeleteView.as_view(), name='deletar_aluno'),
     # Página de Professores
     path('professores/list', ProfessorListView.as_view(), name='listar_professores'),
     path('professores/detalhe', DetalheProfessorListView.as_view(), name='detalhe_professor'),
