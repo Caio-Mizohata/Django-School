@@ -196,13 +196,6 @@
                         
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="id_ano" class="form-label">Ano*</label>
-                                {{ form.ano }}
-                                {% for error in form.ano.errors %}
-                                    <div class="text-danger small">{{ error }}</div>
-                                {% endfor %}
-                            </div>
-                            <div class="col-md-6 mb-3">
                                 <label for="id_data_matricula" class="form-label">Data da Matrícula*</label>
                                 <input type="date" class="form-control" id="id_data_matricula" name="data_matricula" 
                                        value="{{ form.data_matricula.value|date:'Y-m-d' }}" required>
